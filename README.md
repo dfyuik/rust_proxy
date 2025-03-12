@@ -1,10 +1,10 @@
 # Rust 代理服务器
 
-这是一个使用Rust语言开发的高性能HTTP代理服务器，可以将请求从本地端口转发到指定的目标服务器。该项目使用Actix Web框架构建，支持HTTPS请求转发、自定义路径前缀、请求超时设置等功能。
+这是一个使用 Rust 语言开发的高性能 HTTP 代理服务器，可以将请求从本地端口转发到指定的目标服务器。该项目使用 Actix Web 框架构建，支持 HTTPS 请求转发、自定义路径前缀、请求超时设置等功能。
 
 ## 功能特点
 
-- 支持HTTP/HTTPS协议代理转发
+- 支持 HTTP/HTTPS 协议代理转发
 - 可配置的请求超时时间
 - 支持自签名证书（开发环境）
 - 完整的请求/响应日志记录
@@ -54,14 +54,14 @@ port = 3000
 # 目标服务器配置
 [target]
 # 目标服务器地址
-host = "172.22.32.12"
+host = "172.88.22.11"
 port = 8383
 protocol = "https"
 
 # 代理路径配置
 [proxy]
 # 代理路径前缀
-path_prefix = "/federation-server"
+path_prefix = "/federatio"
 
 # 请求配置
 [request]
@@ -79,18 +79,22 @@ level = "info"
 ### 配置项说明
 
 - **server**: 代理服务器自身的配置
+
   - `host`: 本地监听地址
   - `port`: 本地监听端口
 
 - **target**: 目标服务器配置
+
   - `host`: 目标服务器地址
   - `port`: 目标服务器端口
   - `protocol`: 目标服务器协议(http/https)
 
 - **proxy**: 代理配置
+
   - `path_prefix`: 代理路径前缀
 
 - **request**: 请求相关配置
+
   - `timeout`: 请求超时时间(秒)
   - `accept_invalid_certs`: 是否接受无效证书
 
@@ -107,16 +111,16 @@ cargo run --release
 
 2. 发送请求
 
-所有发往`http://127.0.0.1:3000/federation-server/...`的请求都会被转发到`https://172.22.32.12:8383/...`
+所有发往`http://127.0.0.1:3000/federatio/...`的请求都会被转发到`https://172.88.22.11:8383/...`
 
 ### 示例
 
 ```bash
 # 发送GET请求
-curl http://127.0.0.1:3000/federation-server/api/data
+curl http://127.0.0.1:3000/federatio/api/data
 
 # 发送POST请求
-curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' http://127.0.0.1:3000/federation-server/api/submit
+curl -X POST -H "Content-Type: application/json" -d '{"key":"value"}' http://127.0.0.1:3000/federatio/api/submit
 ```
 
 ## 环境变量
@@ -152,8 +156,8 @@ APP_SERVER_PORT=8080 cargo run
 
 ### 主要依赖
 
-- actix-web: Web服务器框架
-- reqwest: HTTP客户端
+- actix-web: Web 服务器框架
+- reqwest: HTTP 客户端
 - config: 配置文件处理
 - serde: 序列化/反序列化
 - log/env_logger: 日志处理
